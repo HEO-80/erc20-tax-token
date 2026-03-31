@@ -4,9 +4,9 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title TaxToken - ERC-20 con impuesto en transferencias
+/// @title TaxToken - ERC-20 token with transfer tax
 /// @author HEO-80
-/// @notice Cada transferencia cobra un % que va a una wallet treasury
+/// @notice Every transfer charges a configurable % fee sent to a treasury wallet
 contract TaxToken is ERC20, Ownable {
     uint256 public taxPercent;
     address public treasury;
@@ -34,6 +34,7 @@ contract TaxToken is ERC20, Ownable {
         _mint(msg.sender, initialSupply);
     }
 
+    /// @dev Override _update to inject tax logic on every transfer
     function _update(
         address from,
         address to,
@@ -49,14 +50,16 @@ contract TaxToken is ERC20, Ownable {
         }
     }
 
-    /// @notice Cambia el porcentaje de impuesto
+    /// @notice Update the transfer tax percentage
+    /// @param _taxPercent New tax percentage (max 25)
     function setTax(uint256 _taxPercent) external onlyOwner {
         require(_taxPercent <= MAX_TAX, "Tax too high");
         emit TaxChanged(taxPercent, _taxPercent);
         taxPercent = _taxPercent;
     }
 
-    /// @notice Cambia la wallet treasury
+    /// @notice Update the treasury wallet address
+    /// @param _treasury New treasury address
     function setTreasury(address _treasury) external onlyOwner {
         require(_treasury != address(0), "Invalid treasury");
         emit TreasuryChanged(treasury, _treasury);
