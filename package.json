@@ -1,0 +1,30 @@
+{
+  "name": "erc20-tax-token",
+  "version": "1.0.0",
+  "description": "create readme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HEO-80/erc20-tax-token.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HEO-80/erc20-tax-token/issues"
+  },
+  "homepage": "https://github.com/HEO-80/erc20-tax-token#readme",
+  "type": "module",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.3",
+    "@types/node": "^22.19.15",
+    "hardhat": "^3.3.0",
+    "typescript": "~5.8.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1"
+  }
+}
